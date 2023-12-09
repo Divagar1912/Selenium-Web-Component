@@ -1,0 +1,160 @@
+Selenium Web Component
+
+
+Question 1:
+
+package SeleniumConcepts.org.guvi;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Selenium_Web_component {
+
+	public static void main(String[] args) throws InterruptedException {
+
+        WebDriverManager.chromedriver().setup();
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.manage().deleteAllCookies();
+		
+		driver.get("https://jqueryui.com/datepicker/");
+		Thread.sleep(2000);
+		
+		driver.manage().window().maximize();
+		Thread.sleep(2000);
+
+		driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='demo-frame']")));
+		
+		WebElement datebox = driver.findElement(By.id("datepicker"));
+		datebox.click();
+		Thread.sleep(2000);
+
+		WebElement nxtmnth = driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']"));
+		nxtmnth.click();
+		Thread.sleep(2000);
+
+		WebElement day22 = driver.findElement(By.xpath("(//a[@class='ui-state-default'])[22]"));
+		day22.click();
+		Thread.sleep(2000);
+		
+		WebElement Selecteddate = driver.findElement(By.id("datepicker"));
+		System.out.println("The selected date is : "+Selecteddate.getAttribute("value"));
+		
+		
+		driver.quit();		
+		
+		
+		
+	}
+
+}
+
+
+OUTPUT:
+The selected date is : 01/22/2024
+
+
+Question 2:
+
+
+package SeleniumConcepts.org.guvi;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Selenium_Web_component_2 {
+
+	public static void main(String[] args) throws InterruptedException {
+
+        WebDriverManager.chromedriver().setup();
+		
+		WebDriver driver = new ChromeDriver();
+		
+		driver.manage().deleteAllCookies();
+		
+		driver.get("https://www.guvi.in/");
+		Thread.sleep(2000);
+		
+		driver.manage().window().maximize();
+		Thread.sleep(2000);
+		
+		WebElement signup = driver.findElement(By.xpath("//a[@class='nav-link btn btn-primary text-white px-4']"));
+		signup.click();
+		
+		WebElement fullname = driver.findElement(By.id("name"));
+		fullname.sendKeys("RajeshKumar");
+		Thread.sleep(2000);
+		
+		WebElement email = driver.findElement(By.id("email"));
+		email.sendKeys("Divagarv1234@gmail.com");
+		Thread.sleep(2000);
+		
+		
+		WebElement password = driver.findElement(By.id("password"));
+		password.sendKeys("1234567890ss");
+		Thread.sleep(2000);
+		
+		WebElement number = driver.findElement(By.xpath("//input[@id='mobileNumber']"));
+		number.sendKeys("8667230922");
+		Thread.sleep(2000);
+		
+		WebElement signupbtn = driver.findElement(By.xpath("//a[@id='signup-btn']"));
+		signupbtn.click();
+		
+		Alert alert = driver.switchTo().alert();
+		Thread.sleep(2000);
+		alert.dismiss();
+		Thread.sleep(2000);
+		
+		WebElement maybelater = driver.findElement(By.id("laterBtn"));
+		maybelater.click();
+		
+		//Following the guidelines, since we are utilizing dummy ID and password for registration, I am skipping the email verification step.
+		//we are getting "Please consider activating your guvi account in registered email , so im logging in with my own id
+		
+		driver.navigate().back();
+		
+		WebElement loginbtn = driver.findElement(By.xpath("//a[@class ='nav-link  text-primary text-center px-4']"));
+		loginbtn.click();
+		
+		WebElement emailaddress = driver.findElement(By.xpath("//input[@id ='email']"));
+		emailaddress.clear();
+		emailaddress.sendKeys("divagarv1912@gmail.com");
+		Thread.sleep(3000);
+		
+		WebElement enterpassword = driver.findElement(By.xpath("//input[@id ='password']"));
+		enterpassword.clear();
+		enterpassword.sendKeys("*********"); // im hinding my password
+		Thread.sleep(3000);
+		
+		WebElement loginsubmit = driver.findElement(By.xpath("//a[@id='login-btn']"));
+		loginsubmit.click();
+		Thread.sleep(2000);
+		
+		if(driver.getTitle().equals("GUVI | courses")){
+			System.out.println("Loggedin successfully");
+		}else {
+			System.out.println("Login Failed");
+		}	
+		
+		driver.quit();
+		
+		
+	}
+
+}
+
+
+OUTPUT:
+
+Loggedin successfully
